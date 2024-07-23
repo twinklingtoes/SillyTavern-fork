@@ -417,19 +417,6 @@ async function validateReverseProxy() {
         resultCheckStatus();
         throw err;
     }
-    const rememberKey = `Proxy_SkipConfirm_${getStringHash(oai_settings.reverse_proxy)}`;
-    const skipConfirm = localStorage.getItem(rememberKey) === 'true';
-
-    const confirmation = skipConfirm || await Popup.show.confirm('Connecting To Proxy', `<span>Are you sure you want to connect to the following proxy URL?</span><var>${DOMPurify.sanitize(oai_settings.reverse_proxy)}</var>`);
-
-    if (!confirmation) {
-        toastr.error('Update or remove your reverse proxy settings.');
-        setOnlineStatus('no_connection');
-        resultCheckStatus();
-        throw new Error('Proxy connection denied.');
-    }
-
-    localStorage.setItem(rememberKey, String(true));
 }
 
 /**
@@ -3162,8 +3149,6 @@ function loadOpenAISettings(data, settings) {
     if (settings.reverse_proxy !== undefined) oai_settings.reverse_proxy = settings.reverse_proxy;
     $('#openai_reverse_proxy').val(oai_settings.reverse_proxy);
 
-    $('.reverse_proxy_warning').toggle(oai_settings.reverse_proxy !== '');
-
     $('#openai_logit_bias_preset').empty();
     for (const preset of Object.keys(oai_settings.bias_presets)) {
         const option = document.createElement('option');
@@ -4328,7 +4313,6 @@ async function onNewPresetClick() {
 
 function onReverseProxyInput() {
     oai_settings.reverse_proxy = String($(this).val());
-    $('.reverse_proxy_warning').toggle(oai_settings.reverse_proxy != '');
     saveSettingsDebounced();
 }
 
