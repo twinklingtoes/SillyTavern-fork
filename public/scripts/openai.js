@@ -3748,7 +3748,6 @@ async function onLogitBiasPresetDeleteClick() {
 // Load OpenAI preset settings
 function onSettingsPresetChange() {
     const settingsToUpdate = {
-        chat_completion_source: ['#chat_completion_source', 'chat_completion_source', false],
         temperature: ['#temp_openai', 'temp_openai', false],
         frequency_penalty: ['#freq_pen_openai', 'freq_pen_openai', false],
         presence_penalty: ['#pres_pen_openai', 'pres_pen_openai', false],
@@ -3759,29 +3758,6 @@ function onSettingsPresetChange() {
         min_p: ['#min_p_openai', 'min_p_openai', false],
         repetition_penalty: ['#repetition_penalty_openai', 'repetition_penalty_openai', false],
         max_context_unlocked: ['#oai_max_context_unlocked', 'max_context_unlocked', true],
-        openai_model: ['#model_openai_select', 'openai_model', false],
-        claude_model: ['#model_claude_select', 'claude_model', false],
-        windowai_model: ['#model_windowai_select', 'windowai_model', false],
-        openrouter_model: ['#model_openrouter_select', 'openrouter_model', false],
-        openrouter_use_fallback: ['#openrouter_use_fallback', 'openrouter_use_fallback', true],
-        openrouter_force_instruct: ['#openrouter_force_instruct', 'openrouter_force_instruct', true],
-        openrouter_group_models: ['#openrouter_group_models', 'openrouter_group_models', false],
-        openrouter_sort_models: ['#openrouter_sort_models', 'openrouter_sort_models', false],
-        openrouter_providers: ['#openrouter_providers_chat', 'openrouter_providers', false],
-        openrouter_allow_fallbacks: ['#openrouter_allow_fallbacks', 'openrouter_allow_fallbacks', true],
-        ai21_model: ['#model_ai21_select', 'ai21_model', false],
-        mistralai_model: ['#model_mistralai_select', 'mistralai_model', false],
-        cohere_model: ['#model_cohere_select', 'cohere_model', false],
-        perplexity_model: ['#model_perplexity_select', 'perplexity_model', false],
-        groq_model: ['#model_groq_select', 'groq_model', false],
-        zerooneai_model: ['#model_01ai_select', 'zerooneai_model', false],
-        custom_model: ['#custom_model_id', 'custom_model', false],
-        custom_url: ['#custom_api_url_text', 'custom_url', false],
-        custom_include_body: ['#custom_include_body', 'custom_include_body', false],
-        custom_exclude_body: ['#custom_exclude_body', 'custom_exclude_body', false],
-        custom_include_headers: ['#custom_include_headers', 'custom_include_headers', false],
-        custom_prompt_post_processing: ['#custom_prompt_post_processing', 'custom_prompt_post_processing', false],
-        google_model: ['#model_google_select', 'google_model', false],
         openai_max_context: ['#openai_max_context', 'openai_max_context', false],
         openai_max_tokens: ['#openai_max_tokens', 'openai_max_tokens', false],
         wrap_in_quotes: ['#wrap_in_quotes', 'wrap_in_quotes', true],
@@ -3802,17 +3778,10 @@ function onSettingsPresetChange() {
         websearch_cohere: ['#websearch_toggle', 'websearch_cohere', true],
         prompts: ['', 'prompts', false],
         prompt_order: ['', 'prompt_order', false],
-        api_url_scale: ['#api_url_scale', 'api_url_scale', false],
-        show_external_models: ['#openai_show_external_models', 'show_external_models', true],
-        proxy_password: ['#openai_proxy_password', 'proxy_password', false],
         assistant_prefill: ['#claude_assistant_prefill', 'assistant_prefill', false],
         assistant_impersonation: ['#claude_assistant_impersonation', 'assistant_impersonation', false],
         human_sysprompt_message: ['#claude_human_sysprompt_textarea', 'human_sysprompt_message', false],
-        use_ai21_tokenizer: ['#use_ai21_tokenizer', 'use_ai21_tokenizer', true],
-        use_google_tokenizer: ['#use_google_tokenizer', 'use_google_tokenizer', true],
         claude_use_sysprompt: ['#claude_use_sysprompt', 'claude_use_sysprompt', true],
-        use_makersuite_sysprompt: ['#use_makersuite_sysprompt', 'use_makersuite_sysprompt', true],
-        use_alt_scale: ['#use_alt_scale', 'use_alt_scale', true],
         squash_system_messages: ['#squash_system_messages', 'squash_system_messages', true],
         image_inlining: ['#openai_image_inlining', 'image_inlining', true],
         inline_image_quality: ['#openai_inline_image_quality', 'inline_image_quality', false],
@@ -3860,9 +3829,7 @@ function onSettingsPresetChange() {
             }
         }
 
-        $('#chat_completion_source').trigger('change');
         $('#openai_logit_bias_preset').trigger('change');
-        $('#openrouter_providers_chat').trigger('change');
 
         saveSettingsDebounced();
         eventSource.emit(event_types.OAI_PRESET_CHANGED_AFTER);
